@@ -28,4 +28,5 @@ test_slopes = [
   (1, 2),
 ]
 
+# I have since learned about math.prod available since python 3.8 but whatever
 print(reduce( lambda x, y: x * y, list(map(lambda slope: damn_the_trees_full_speed_ahead(slope), test_slopes))))
