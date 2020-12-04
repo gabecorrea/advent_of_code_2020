@@ -10,7 +10,7 @@ def validate_passport(passport):
   if 'byr' in passport and 'iyr' in passport and 'eyr' in passport and 'hgt' in passport and 'hcl' in passport and 'ecl' in passport and 'pid' in passport:
     field_checks.append(True)
   else:
-    return None
+    return False
   
   height_check = re.match(r'^(\d+)(cm|in)$', passport['hgt'])
   if height_check:
@@ -19,19 +19,19 @@ def validate_passport(passport):
     elif height_check.group(2) == 'in' and int(height_check.group(1)) in range(59, 77):
       field_checks.append(True)
     else:
-      return None
+      return False
   else:
-    return None
+    return False
 
   if re.match('^#([0-9a-f]){6}$', passport['hcl']):
     field_checks.append(True)
   else:
-    return None
+    return False
 
   if re.match('^[0-9]{9}$', passport['pid']):
     field_checks.append(True)
   else:
-    return None
+    return False
 
   try:
     if int(passport['byr']) in range(1920,2003) \
@@ -39,19 +39,19 @@ def validate_passport(passport):
     and int(passport['eyr']) in range(2020,2031):
       field_checks.append(True)
     else:
-      return None
+      return False
   except ValueError:
-    return None
+    return False
   
   if passport['ecl'] in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']:
     field_checks.append(True)
   else:
-    return None
+    return False
 
   if all(field_checks):
     return True
   else:
-    return None
+    return False
 
 passport_list = [re.split(' |\n', passport_string) for passport_string in open('aoc2020/day_4/input.txt', 'r').read().split('\n\n')]
 candidate_passports = [passport_data for passport_data in passport_list if len(passport_data) >= 7]
