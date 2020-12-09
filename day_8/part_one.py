@@ -14,6 +14,4 @@ while index not in executed_instructions:
   else:
     index += 1
 
-print(executed_instructions)
-print(index)
 print(acc)
