@@ -1,10 +1,6 @@
 from collections import defaultdict
 
 seat_grid = [['.'] + list(row) + ['.'] for row in open('aoc2020/day_11/input.txt').read().splitlines()]
-#seat_grid = [['.'] + list(row) + ['.'] for row in open('aoc2020/day_11/input_sparse.txt').read().splitlines()]
-#seat_grid = [['.'] + list(row) + ['.'] for row in open('aoc2020/day_11/input_none.txt').read().splitlines()]
-#seat_grid = [['.'] + list(row) + ['.'] for row in open('aoc2020/day_11/input_initial.txt').read().splitlines()]
-print(len(seat_grid))
 pad_count = len(seat_grid) + 2
 seat_grid.insert(0, list('.' * pad_count))
 seat_grid.append(list('.' * pad_count))
@@ -16,7 +12,7 @@ iterations = 0
 
 while True:
   visible_seats = defaultdict(lambda: set())
-  #print(iterations)
+
   # pass 1, top down left right
   for r in range(1,len(seat_grid)-1):
     row = seat_grid[r]
@@ -80,8 +76,6 @@ while True:
   new_grid = [list('.' * pad_count)]
   new_grid.append(list('.' * pad_count))
   
-  # last row messing up somehow.
-  # maybe make that print grid method
   # assign_seats
   for r in range(1,len(seat_grid)-1):
     row = seat_grid[r]
@@ -109,5 +103,4 @@ while True:
     seat_grid = new_grid
 
 occupied_seat_count = len([seat for seat_row in seat_grid for seat in seat_row if seat == '#'])
-print('-----')
 print(occupied_seat_count)
